@@ -637,6 +637,26 @@ void tokenize_cleanup(void)
                tmp = chunk_get_next_ncnl(tmp);
                if (tmp != NULL)
                {
+                  tmp2 = chunk_get_next_type(tmp, CT_PAREN_OPEN, pc->level);
+                  if (tmp2 != NULL)
+                  {
+                     tmp = chunk_get_prev_ncnl(tmp2);
+                     c_token_t last_token_type = tmp2->type;
+                     UINT32 last_orig_col_end = tmp2->orig_col_end;
+                     while (last_token_type != CT_PAREN_CLOSE)
+                     {
+                        last_orig_col_end = tmp2->orig_col_end;
+                        last_token_type = tmp2->type;
+                        tmp->str += tmp2->str;
+
+                        chunk_t *tmp_next = chunk_get_next_ncnl(tmp2);
+                        chunk_del(tmp2);
+                        tmp2 = tmp_next;
+                     }
+                     tmp->orig_col_end = last_orig_col_end;
+                     tmp = chunk_get_next_ncnl(tmp);
+                  }
+
                   tmp->flags |= PCF_STMT_START | PCF_EXPR_START;
 
                   tmp = chunk_get_next_type(tmp, CT_SEMICOLON, pc->level);
