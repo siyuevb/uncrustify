@@ -1264,6 +1264,14 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
    }
 
    if ((first->type == CT_PTR_TYPE) &&
+       (second->type == CT_QUALIFIER) &&
+       (cpd.settings[UO_sp_between_ptr_qualifier].a != AV_IGNORE))
+   {
+      log_rule("sp_between_ptr_qualifier");
+      return(cpd.settings[UO_sp_between_ptr_qualifier].a);
+   }
+
+   if ((first->type == CT_PTR_TYPE) &&
        (cpd.settings[UO_sp_after_ptr_star_func].a != AV_IGNORE) &&
        ((first->parent_type == CT_FUNC_DEF) ||
         (first->parent_type == CT_FUNC_PROTO) ||

@@ -301,6 +301,7 @@ enum uncrustify_options
    UO_sp_after_byref_func,
    UO_sp_before_byref_func,
    UO_sp_between_ptr_star,      // space between two '*' that are part of a type
+   UO_sp_between_ptr_qualifier,
 
    UO_sp_special_semi,          /* space empty stmt ';' on while, if, for
                                  * example "while (*p++ = ' ') ;" */

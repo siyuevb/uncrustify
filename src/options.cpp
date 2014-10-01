@@ -231,6 +231,8 @@ void register_options(void)
                   "If set to 'ignore', sp_before_ptr_star is used instead.");
    unc_add_option("sp_between_ptr_star", UO_sp_between_ptr_star, AT_IARF,
                   "Add or remove space between pointer stars '*'");
+   unc_add_option("sp_between_ptr_qualifier", UO_sp_between_ptr_qualifier, AT_IARF,
+                  "Add or remove space between pointer star '*' and qualifier (e.g. 'const').");
    unc_add_option("sp_after_ptr_star", UO_sp_after_ptr_star, AT_IARF,
                   "Add or remove space after pointer star '*', if followed by a word.");
    unc_add_option("sp_after_ptr_star_func", UO_sp_after_ptr_star_func, AT_IARF,

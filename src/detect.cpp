@@ -110,6 +110,7 @@ static void detect_space_options()
    SP_VOTE_VAR(sp_before_ptr_star);
    SP_VOTE_VAR(sp_before_unnamed_ptr_star);
    SP_VOTE_VAR(sp_between_ptr_star);
+   SP_VOTE_VAR(sp_between_ptr_qualifier);
    SP_VOTE_VAR(sp_after_ptr_star);
    SP_VOTE_VAR(sp_after_byref);
    SP_VOTE_VAR(sp_before_byref);
@@ -231,6 +232,10 @@ static void detect_space_options()
          else
          {
             vote_sp_before_ptr_star.vote(prev, pc);
+         }
+         if (next->type == CT_QUALIFIER)
+         {
+            vote_sp_between_ptr_qualifier.vote(pc, next);
          }
          if (CharTable::IsKw1(next->str[0]))
          {
